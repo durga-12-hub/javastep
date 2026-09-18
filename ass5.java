@@ -1,58 +1,35 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class ass5 {
 
-    static void printFilteredWordFrequency(String feedback) {
-
-        feedback = feedback.toLowerCase();
-
-        feedback = feedback.replace(".", "");
-        feedback = feedback.replace(",", "");
-
-        String[] words = feedback.split("\\s+");
-
-        String[] stopWords = {
-            "the", "was", "and", "a", "is", "of", "in"
-        };
-
-        HashSet<String> stopSet = new HashSet<>();
-
-        for (String word : stopWords) {
-            stopSet.add(word);
-        }
-
-        HashMap<String, Integer> frequency = new HashMap<>();
-
-        for (String word : words) {
-
-            if (stopSet.contains(word)) {
-                continue;
-            }
-
-            frequency.put(word, frequency.getOrDefault(word, 0) + 1);
-        }
-
-        List<Map.Entry<String, Integer>> list =
-                new ArrayList<>(frequency.entrySet());
-
-        list.sort((a, b) ->
-                b.getValue().compareTo(a.getValue()));
-
-        for (Map.Entry<String, Integer> entry : list) {
-            System.out.println(
-                    entry.getKey() + ": " + entry.getValue()
-            );
-        }
+    static void applyMultipliers(double[] playerScores, int captainIndex, int viceCaptainIndex) {
+        playerScores[captainIndex] = playerScores[captainIndex] * 2;
+        playerScores[viceCaptainIndex] = playerScores[viceCaptainIndex] * 1.5;
     }
 
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter feedback: ");
-        String feedback = sc.nextLine();
+        System.out.print("Enter number of players: ");
+        int n = sc.nextInt();
 
-        printFilteredWordFrequency(feedback);
+        double[] scores = new double[n];
+
+        System.out.println("Enter player scores:");
+        for (int i = 0; i < n; i++) {
+            scores[i] = sc.nextDouble();
+        }
+
+        System.out.print("Enter captain index: ");
+        int captain = sc.nextInt();
+
+        System.out.print("Enter vice-captain index: ");
+        int viceCaptain = sc.nextInt();
+
+        applyMultipliers(scores, captain, viceCaptain);
+
+        System.out.println("Updated Scores: " + Arrays.toString(scores));
 
         sc.close();
     }
