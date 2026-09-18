@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class ass1 {
 
     static void checkDuplicateSeats(int[] seatNumbers) {
         boolean foundDuplicate = false;
